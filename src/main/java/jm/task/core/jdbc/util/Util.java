@@ -26,17 +26,6 @@ public class Util {
         return connection;
     }
 
-    public static Statement getStatement() {
-        Statement statement = null;
-        try {
-            statement = getConnection().createStatement();
-        } catch (Exception e) {
-            System.err.println("Ошибка получения statement: ");
-            e.printStackTrace();
-        }
-        return statement;
-    }
-
     // Hibernate
 
     private static SessionFactory sessionFactory;
@@ -49,7 +38,7 @@ public class Util {
                         .setProperty("hibernate.connection.username", dataBaseUser)
                         .setProperty("hibernate.connection.password", dataBasePassword)
                         .setProperty("hibernate.connection.driver_class", "org.postgresql.Driver")
-                        .setProperty("hibernate. dialect", "org.hibernate.dialect.PostgreSQLDialect");
+                        .setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
                 configuration.addAnnotatedClass(User.class);
                 StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
                 sessionFactory = configuration.buildSessionFactory(builder.build());

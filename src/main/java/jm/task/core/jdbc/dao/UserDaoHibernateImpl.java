@@ -5,8 +5,6 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
@@ -86,10 +84,7 @@ public class UserDaoHibernateImpl implements UserDao {
         List<User> users = null;
         Session session = Util.getSessionFactory().openSession();
         try {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<User> criteria = builder.createQuery(User.class);
-            criteria.from(User.class);
-            users = session.createQuery(criteria).getResultList();
+            users = session.createQuery("FROM User").getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
